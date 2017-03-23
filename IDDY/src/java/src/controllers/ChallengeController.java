@@ -9,7 +9,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import src.entities.Categories;
 import src.entities.Difficulties;
+import src.facades.CategoriesFacade;
 import src.facades.DifficultiesFacade;
 
 /**
@@ -22,6 +24,8 @@ public class ChallengeController {
 
     @EJB
     private DifficultiesFacade difficultiesFacade;
+    @EJB
+    private CategoriesFacade categoriesFacade;
     /**
      * Creates a new instance of ChallengeController
      */
@@ -30,6 +34,10 @@ public class ChallengeController {
     
     public List<Difficulties> getAllDifficulties(){
         return difficultiesFacade.getAllDifficulties();
+    }
+    
+    public List<Categories> getAllCategories(){
+        return categoriesFacade.getAllCategories();
     }
     
 }

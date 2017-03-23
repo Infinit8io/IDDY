@@ -5,10 +5,13 @@
  */
 package src.facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import src.entities.Categories;
+import src.entities.Difficulties;
 
 /**
  *
@@ -29,4 +32,8 @@ public class CategoriesFacade extends AbstractFacade<Categories> {
         super(Categories.class);
     }
     
+    public List<Categories> getAllCategories(){
+        Query queryAllValues = em.createNamedQuery("Categories.findAll");
+        return queryAllValues.getResultList();
+    }
 }

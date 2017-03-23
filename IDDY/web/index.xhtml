@@ -17,6 +17,15 @@
                 <h:outputText value="#{difficulties.points}" />
             </h:column>
         </h:dataTable>
+        
+        <h2>All categories</h2>
+        <h:dataTable value ="#{challengeController.allCategories}"  var ="categories">
+
+            <h:column>
+                <h:outputText value="#{categories.title}" />
+                <h:outputText value="#{categories.description}" />
+            </h:column>
+        </h:dataTable>
     </h:body>
 </html>
 
