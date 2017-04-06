@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,6 +19,46 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Default secure pages</web-resource-name>
+            <url-pattern>/default/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>default_user_role</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>IDDY-realm</realm-name>
+    </login-config>
+    <security-role>
+        <role-name>default_user_role</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Other secure pages</web-resource-name>
+            <url-pattern>/other/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>other_user_role</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>other_user_role</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Administration secure pages</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin_role</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>admin_role</role-name>
+    </security-role>
 </web-app>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Other Page</title>
+    </h:head>
+    <h:body>
+        <h3>Page for authorized users having the <q>other_user_role</q></h3>
+        User login name: <strong>${request.remoteUser}</strong><br/>
+        Authorized roles:<ul style="margin-top:0;">
+            <h:panelGroup rendered="#{request.isUserInRole('default_user_role')}">
+                <li>default_user_role</li>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{request.isUserInRole('other_user_role')}">
+                <li style="font-weight:bold;">other_user_role</li>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{request.isUserInRole('admin_role')}">
+                <li>admin_role</li>
+            </h:panelGroup>
+        </ul>
+        Go back to <h:link outcome="/default/index">the default page</h:link>.
+    </h:body>
+</html>
