@@ -1,25 +1,82 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Default Page</title>
-    </h:head>
-    <h:body>
-        <h3>Default page for all authenticated users</h3>
-        User login name: <strong>${request.remoteUser}</strong><br/>
-        Authorized roles:<ul style="margin-top:0;">
-            <h:panelGroup rendered="#{request.isUserInRole('default_user_role')}">
-                <li style="font-weight:bold;">default_user_role</li>
-            </h:panelGroup>
-            <h:panelGroup rendered="#{request.isUserInRole('other_user_role')}">
-                <li>other_user_role</li>
-            </h:panelGroup>
-            <h:panelGroup rendered="#{request.isUserInRole('admin_role')}">
-                <li>admin_role</li>
-            </h:panelGroup>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>I Double Dare You</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="static/css/iddy.css" />
+       
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+                
+        <div class="jumbotron">
+            <div class="container">
+  <h1 class="display-3">Hello, ${request.remoteUser}!</h1>
+  <p class="lead">This is your IDDY administration personal page.</p>
+  <hr class="my-4" />
+  <p>From here you can create new challenges and accept the ones proposed to you.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="./new_challenge.xhtml" role="button">Create new challenge</a>
+  </p>
+            </div>
+</div>
+        
+        
+        <div class="container mt-4">
+
+            <div class="row my-4">
+                <div class="col d-flex justify-content-center">
+                    <span class="badge badge-default p-3 my-4" style="font-size: 4em;">120 points</span>  
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <h2>Accepted Challenges</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">Challenge 1</li>
+                        <li class="list-group-item">Challenge 2</li>
+                        <li class="list-group-item">Challenge 3</li>
+                    </ul>
+                </div>
+                                <div class="col">
+                                        <h2>Finished Challenges</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">Challenge 1</li>
+                        <li class="list-group-item">Challenge 2</li>
+                        <li class="list-group-item">Challenge 3</li>
+                    </ul>
+                </div>
+            </div>
+            
+                    <div class="row">
+                <div class="col">
+                   
+                Authorized roles:<ul style="margin-top:0;">
+                    <h:panelGroup rendered="#{request.isUserInRole('default_user_role')}">
+                        <li style="font-weight:bold;">default_user_role</li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{request.isUserInRole('other_user_role')}">
+                        <li>other_user_role</li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{request.isUserInRole('admin_role')}">
+                        <li>admin_role</li>
+                    </h:panelGroup>
         </ul>
         Go to <h:link outcome="/other/other_page">the other page</h:link>.<br/>
         Go to <h:link outcome="/admin/admin_page">the administration page</h:link>.
-    </h:body>
+            </div>
+        </div>
+            
+        </div>
+        
+    </body>
 </html>
+
