@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <head>
         <title>I Double Dare You</title>
 
@@ -17,47 +18,45 @@
         
         <div class="col-md-12 img-bg">
             <div class="bg-filter d-flex align-items-center">
-            <div class="container">
-                <h1>I Double Dare You</h1>
-                <p class="lead">Challenge your friends and yourself</p>
-                <h:panelGroup rendered="#{request.isUserInRole('default_user_role')}">
-                    <a href="./default" class="btn btn-outline-success">Profile dashboard</a>
-                </h:panelGroup>
-                <h:panelGroup rendered="#{!request.isUserInRole('default_user_role')}">
-                    <a href="./default" class="btn btn-outline-secondary">Connexion</a>
-                </h:panelGroup>
-                
-            </div>
+                <div class="container">
+                    <h1>I Double Dare You</h1>
+                    <p class="lead">Challenge your friends and yourself</p>
+                    <h:panelGroup rendered="#{request.isUserInRole('default_user_role')}">
+                        <a href="./default" class="btn btn-outline-success">Profile dashboard</a>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!request.isUserInRole('default_user_role')}">
+                        <a href="./default" class="btn btn-outline-secondary">Connexion</a>
+                    </h:panelGroup>
+                </div>
             </div>
         </div>
         
+        <div class="container py-4 mb-5">
         <div class="row">
-            <div class="container">
-                <h1>coucou</h1>
+                <div class="col">
+                    <h2>Difficulties</h2>
+                    <hr/>
+                    <ul class="list-group">
+                    <ui:repeat value="#{challengeController.allDifficulties}" var="item">
+                        <li class="list-group-item justify-content-between">#{item.title} <span class="badge badge-default">#{item.points} points</span></li>
+                    </ui:repeat> 
+                    </ul>
+                    
+                </div>
+                <div class="col">
+                    <h2>Categories</h2>
+                    <hr/>
+                    
+                                        <ul class="list-group">
+                    <ui:repeat value="#{challengeController.allCategories}" var="item">
+                        <li class="list-group-item justify-content-between">#{item.title}</li>
+                    </ui:repeat> 
+                    </ul>
                         
-
-        <h2>All difficulties</h2>
-        
-        
-        <h:dataTable value ="#{challengeController.allDifficulties}"  var ="difficulties">
-            <h:column>
-                <h:outputText value="#{difficulties.title}" />
-                <h:outputText value="#{difficulties.points}" />
-            </h:column>
-        </h:dataTable>
-        
-        <h2>All categories</h2>
-        <h:dataTable value ="#{challengeController.allCategories}"  var ="categories">
-
-            <h:column>
-                <h:outputText value="#{categories.title}" />
-                <h:outputText value="#{categories.description}" />
-            </h:column>
-        </h:dataTable>
-            </div>
+                </div>
         </div>
+            </div>
         
-
     </body>
 </html>
 
