@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewChallengesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewChallengesLabel_id}"/>
+                    <h:outputText value="#{challengesController.selected.id}" title="#{bundle.ViewChallengesTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewChallengesLabel_title}"/>
+                    <h:outputText value="#{challengesController.selected.title}" title="#{bundle.ViewChallengesTitle_title}"/>
+                    <h:outputText value="#{bundle.ViewChallengesLabel_description}"/>
+                    <h:outputText value="#{challengesController.selected.description}" title="#{bundle.ViewChallengesTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewChallengesLabel_fkCat}"/>
+                    <h:outputText value="#{challengesController.selected.fkCat}" title="#{bundle.ViewChallengesTitle_fkCat}"/>
+                    <h:outputText value="#{bundle.ViewChallengesLabel_fkDiff}"/>
+                    <h:outputText value="#{challengesController.selected.fkDiff}" title="#{bundle.ViewChallengesTitle_fkDiff}"/>
+                    <h:outputText value="#{bundle.ViewChallengesLabel_fkUser}"/>
+                    <h:outputText value="#{challengesController.selected.fkUser}" title="#{bundle.ViewChallengesTitle_fkUser}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{challengesController.destroyAndView}" value="#{bundle.ViewChallengesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewChallengesEditLink}"/>
+                <br />
+                <h:commandLink action="#{challengesController.prepareCreate}" value="#{bundle.ViewChallengesCreateLink}" />
+                <br />
+                <h:commandLink action="#{challengesController.prepareList}" value="#{bundle.ViewChallengesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewChallengesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,32 +1,29 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>I Double Dare You</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous" />
-    </h:head>
-    <h:body>
-        Salut, bienvenue sur notre site !<br/>
-        Inscrit toi : <a href="#">connexion</a>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-        <h2>All difficulties</h2>
-        <h:dataTable value ="#{challengeController.allDifficulties}"  var ="difficulties">
-
-            <h:column>
-                <h:outputText value="#{difficulties.title}" />
-                <h:outputText value="#{difficulties.points}" />
-            </h:column>
-        </h:dataTable>
-        
-        <h2>All categories</h2>
-        <h:dataTable value ="#{challengeController.allCategories}"  var ="categories">
-
-            <h:column>
-                <h:outputText value="#{categories.title}" />
-                <h:outputText value="#{categories.description}" />
-            </h:column>
-        </h:dataTable>
-    </h:body>
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Accueil"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <div class="col-md-12 img-bg">
+                <div class="bg-filter d-flex align-items-center">
+                    <div class="container">
+                        <h1>I Double Dare You</h1>
+                        <p class="lead">Challenge your friends and yourself</p>
+                        <h:panelGroup rendered="#{request.isUserInRole('default_user_role')}">
+                            <a href="./default" class="btn btn-outline-success">Profile dashboard</a>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{!request.isUserInRole('default_user_role')}">
+                            <a href="./default" class="btn btn-outline-secondary">Connexion</a>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+        </ui:define>   
+    </ui:composition>
 </html>
-

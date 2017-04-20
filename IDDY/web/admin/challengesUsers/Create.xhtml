@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateChallengesUsersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{challengesUsersController.selected.id}" title="#{bundle.CreateChallengesUsersTitle_id}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_state}" for="state" />
+                    <h:inputText id="state" value="#{challengesUsersController.selected.state}" title="#{bundle.CreateChallengesUsersTitle_state}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_state}"/>
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_datetimeCreate}" for="datetimeCreate" />
+                    <h:inputText id="datetimeCreate" value="#{challengesUsersController.selected.datetimeCreate}" title="#{bundle.CreateChallengesUsersTitle_datetimeCreate}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_datetimeCreate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_datetimeDone}" for="datetimeDone" />
+                    <h:inputText id="datetimeDone" value="#{challengesUsersController.selected.datetimeDone}" title="#{bundle.CreateChallengesUsersTitle_datetimeDone}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_fkGiver}" for="fkGiver" />
+                    <h:selectOneMenu id="fkGiver" value="#{challengesUsersController.selected.fkGiver}" title="#{bundle.CreateChallengesUsersTitle_fkGiver}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkGiver}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_fkGetter}" for="fkGetter" />
+                    <h:selectOneMenu id="fkGetter" value="#{challengesUsersController.selected.fkGetter}" title="#{bundle.CreateChallengesUsersTitle_fkGetter}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkGetter}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_fkChall}" for="fkChall" />
+                    <h:selectOneMenu id="fkChall" value="#{challengesUsersController.selected.fkChall}" title="#{bundle.CreateChallengesUsersTitle_fkChall}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkChall}">
+                        <f:selectItems value="#{challengesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{challengesUsersController.create}" value="#{bundle.CreateChallengesUsersSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{challengesUsersController.prepareList}" value="#{bundle.CreateChallengesUsersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateChallengesUsersIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -5,11 +5,9 @@
  */
 package src.facades;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import src.entities.Difficulties;
 
 /**
@@ -29,11 +27,6 @@ public class DifficultiesFacade extends AbstractFacade<Difficulties> {
 
     public DifficultiesFacade() {
         super(Difficulties.class);
-    }
-    
-    public List<Difficulties> getAllDifficulties(){
-        Query queryAllValues = em.createNamedQuery("Difficulties.findAll");
-        return queryAllValues.getResultList();
     }
     
 }
