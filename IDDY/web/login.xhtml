@@ -10,7 +10,22 @@
             <h:outputText value="Connexion"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h1>Page de connexion</h1>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col col-md-5 card mt-5">
+                        <div class="card-block">
+                            <h2>Connexion</h2>
+                            <form class="login-form" action="j_security_check" method="post">
+                                <label>Pseudo</label>
+                                <input id="login_name" type="text" class="form-control" name="j_username" autofocus="true"/>
+                                <label>Mot de passe</label>
+                                <input id="password" type="password" class="form-control" name="j_password"/>
+                                <input type="submit" value="Connexion" class="btn btn-primary my-2"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ui:define>   
     </ui:composition>
 </html>

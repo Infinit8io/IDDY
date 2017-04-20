@@ -8,6 +8,7 @@ package src.facades;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import src.entities.Users;
 
 /**
@@ -29,4 +30,9 @@ public class UsersFacade extends AbstractFacade<Users> {
         super(Users.class);
     }
     
+    public Users findUserByLoginName(String loginName) {
+        Query users = em.createNamedQuery("User.findByLoginName").setParameter("loginName", loginName);
+        
+        return (Users) users.getSingleResult();
+    }
 }
