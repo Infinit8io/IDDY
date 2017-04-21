@@ -191,6 +191,15 @@ public class UsersController implements Serializable {
     public Users getUsers(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public void follow(int followerId){
+        //DO SOMETHING PLS
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        String fdp = ctx.getExternalContext().getRemoteUser();
+        
+        
+        System.out.println("User "+fdp+" want to follow user "+followerId);
+    }
 
     @FacesConverter(forClass = Users.class)
     public static class UsersControllerConverter implements Converter {
