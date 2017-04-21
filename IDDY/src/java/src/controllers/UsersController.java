@@ -1,12 +1,14 @@
 package src.controllers;
 
-import src.entities.Users;
+import java.io.IOException;
 import src.controllers.util.JsfUtil;
-import src.controllers.util.PaginationHelper;
+import src.entities.util.PaginationHelper;
 import src.facades.UsersFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.entities.Users;
 
 @Named("usersController")
 @SessionScoped
@@ -81,6 +84,7 @@ public class UsersController implements Serializable {
 
     public String create() {
         try {
+            current.setPassword(JsfUtil.digest("SHA-256", current.getPassword()));
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
             return prepareCreate();
@@ -237,6 +241,26 @@ public class UsersController implements Serializable {
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Users.class.getName());
             }
+        }
+
+    }
+    
+    public Users getLoggedUser() {
+        String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+        System.out.println(remoteUser);
+        if (remoteUser != null) {
+            current = ejbFacade.findUserByLoginName(remoteUser);
+        }
+        return current;
+    }
+    
+    public void logout() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

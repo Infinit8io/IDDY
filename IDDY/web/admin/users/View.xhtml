@@ -17,14 +17,14 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewUsersLabel_id}"/>
                     <h:outputText value="#{usersController.selected.id}" title="#{bundle.ViewUsersTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewUsersLabel_pseudo}"/>
-                    <h:outputText value="#{usersController.selected.pseudo}" title="#{bundle.ViewUsersTitle_pseudo}"/>
                     <h:outputText value="#{bundle.ViewUsersLabel_password}"/>
                     <h:outputText value="#{usersController.selected.password}" title="#{bundle.ViewUsersTitle_password}"/>
                     <h:outputText value="#{bundle.ViewUsersLabel_email}"/>
                     <h:outputText value="#{usersController.selected.email}" title="#{bundle.ViewUsersTitle_email}"/>
                     <h:outputText value="#{bundle.ViewUsersLabel_bio}"/>
                     <h:outputText value="#{usersController.selected.bio}" title="#{bundle.ViewUsersTitle_bio}"/>
+                    <h:outputText value="#{bundle.ViewUsersLabel_loginName}"/>
+                    <h:outputText value="#{usersController.selected.loginName}" title="#{bundle.ViewUsersTitle_loginName}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usersController.destroyAndView}" value="#{bundle.ViewUsersDestroyLink}"/>

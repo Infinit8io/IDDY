@@ -17,14 +17,14 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.CreateUsersLabel_id}" for="id" />
                     <h:inputText id="id" value="#{usersController.selected.id}" title="#{bundle.CreateUsersTitle_id}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateUsersLabel_pseudo}" for="pseudo" />
-                    <h:inputText id="pseudo" value="#{usersController.selected.pseudo}" title="#{bundle.CreateUsersTitle_pseudo}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_pseudo}"/>
                     <h:outputLabel value="#{bundle.CreateUsersLabel_password}" for="password" />
                     <h:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_password}"/>
                     <h:outputLabel value="#{bundle.CreateUsersLabel_email}" for="email" />
                     <h:inputText id="email" value="#{usersController.selected.email}" title="#{bundle.CreateUsersTitle_email}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_email}"/>
                     <h:outputLabel value="#{bundle.CreateUsersLabel_bio}" for="bio" />
                     <h:inputText id="bio" value="#{usersController.selected.bio}" title="#{bundle.CreateUsersTitle_bio}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_bio}"/>
+                    <h:outputLabel value="#{bundle.CreateUsersLabel_loginName}" for="loginName" />
+                    <h:inputText id="loginName" value="#{usersController.selected.loginName}" title="#{bundle.CreateUsersTitle_loginName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_loginName}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usersController.create}" value="#{bundle.CreateUsersSaveLink}" />

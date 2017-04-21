@@ -10,7 +10,26 @@
             <h:outputText value="Inscription"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h1>Page d'inscription</h1>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col col-md-5 card mt-5">
+                        <div class="card-block">
+                            <h2>Inscription</h2>
+                            <h:form class="login-form">
+                                <label>Pseudo</label>
+                                <h:inputText class="form-control" id="login_name" value="#{usersController.selected.loginName}" title="#{bundle.CreateUsersTitle_loginName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_loginName}"/>
+                                <label>Mot de passe</label>
+                                <h:inputText class="form-control" id="password" value="#{usersController.selected.password}" title="#{bundle.CreateUsersTitle_password}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_password}"/>
+                                <label>Email</label>
+                                <h:inputText class="form-control" id="email" value="#{usersController.selected.email}" title="#{bundle.CreateUsersTitle_email}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_email}"/>
+                                <label>Biographie</label>
+                                <h:inputText class="form-control" id="bio" value="#{usersController.selected.bio}" title="#{bundle.CreateUsersTitle_bio}" requiredMessage="#{bundle.CreateUsersRequiredMessage_bio}"/>
+                                <h:commandButton actionListener="#{usersController.create}" action="/login.xhtml" class="btn btn-primary my-2" value="S'inscrire"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ui:define>   
     </ui:composition>
 </html>
