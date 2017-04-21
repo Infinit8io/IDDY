@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 02 Mars 2017 à 15:23
+-- Généré le :  Ven 21 Avril 2017 à 08:10
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -57,6 +57,13 @@ CREATE TABLE `challenges` (
   `fk_cat` int(11) NOT NULL,
   `fk_diff` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `challenges`
+--
+
+INSERT INTO `challenges` (`id`, `fk_user`, `title`, `description`, `fk_cat`, `fk_diff`) VALUES
+(1, 3, 'Challenge de test', 'Ceci est un challenge de test', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -113,16 +120,67 @@ CREATE TABLE `friendship` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `groups`
+--
+
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table of user groups';
+
+--
+-- Contenu de la table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`) VALUES
+(2, 'admins'),
+(1, 'users');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `pseudo` varchar(17) CHARACTER SET latin1 NOT NULL,
-  `password` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(100) NOT NULL,
   `email` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `bio` varchar(140) CHARACTER SET latin1 NOT NULL
+  `bio` varchar(140) CHARACTER SET latin1 NOT NULL,
+  `login_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`id`, `password`, `email`, `bio`, `login_name`) VALUES
+(1, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user1@gmail.com', 'biographie frere', 'user1'),
+(2, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user2@gmail.com', 'biographie frere', 'user2'),
+(3, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user3@gmail.com', 'biographie frere', 'user3'),
+(4, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user4@gmail.com', 'biographie frere', 'user4'),
+(11, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'bryan.muhmenthaler@gmail.com', 'Ceci est ma belle biographie.', 'bryan');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users_groups`
+--
+
+CREATE TABLE `users_groups` (
+  `login_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `group_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table of groups to which the users belong';
+
+--
+-- Contenu de la table `users_groups`
+--
+
+INSERT INTO `users_groups` (`login_name`, `group_name`) VALUES
+('user3', 'admins'),
+('user4', 'admins'),
+('user2', 'users'),
+('user4', 'users');
 
 --
 -- Index pour les tables exportées
@@ -167,11 +225,25 @@ ALTER TABLE `friendship`
   ADD KEY `fk_user2` (`fk_user2`);
 
 --
+-- Index pour la table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `groups_name_uk` (`name`);
+
+--
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pseudo` (`pseudo`);
+  ADD UNIQUE KEY `login_name` (`login_name`);
+
+--
+-- Index pour la table `users_groups`
+--
+ALTER TABLE `users_groups`
+  ADD UNIQUE KEY `users_groups_uk` (`login_name`,`group_name`),
+  ADD KEY `users_groups_group_name_fk` (`group_name`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -186,7 +258,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `challenges`
 --
 ALTER TABLE `challenges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `challenges_users`
 --
@@ -203,10 +275,15 @@ ALTER TABLE `difficulties`
 ALTER TABLE `friendship`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Contraintes pour les tables exportées
 --
@@ -233,6 +310,13 @@ ALTER TABLE `challenges_users`
 ALTER TABLE `friendship`
   ADD CONSTRAINT `friendship_ibfk_1` FOREIGN KEY (`fk_user1`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `friendship_ibfk_2` FOREIGN KEY (`fk_user2`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `users_groups`
+--
+ALTER TABLE `users_groups`
+  ADD CONSTRAINT `users_groups_group_name_fk` FOREIGN KEY (`group_name`) REFERENCES `groups` (`name`),
+  ADD CONSTRAINT `users_groups_login_name_fk` FOREIGN KEY (`login_name`) REFERENCES `users` (`login_name`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
