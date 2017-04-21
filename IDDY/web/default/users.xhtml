@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -11,6 +12,34 @@
         </ui:define>
         <ui:define name="body">
             <h3>Liste des users</h3>
+
+            <table class="table">
+                <tr>
+                    <th>User name</th>
+                    <th>Follow</th>
+                </tr>
+                <c:forEach var="u" items="#{usersController.getAll()}">
+                    <c:if test="#{!usersController.isActualUser(u.getId())}">
+                        <tr>
+                            <td><span class="lead">#{u.loginName}</span></td>
+                            <td>
+                                <h:form>
+                                    <c:choose>
+                                        <c:when test="#{friendshipController.isFollowing(u.id)}">
+                                            <h:commandLink value="Unfollow" class="btn btn-danger" action="#{usersController.unfollow(u.id)}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <h:commandLink value="Follow" class="btn btn-success" action="#{usersController.follow(u.id)}" />
+                                        </c:otherwise>
+                                    </c:choose>
+                                    
+                                </h:form>
+                            </td>
+                        </tr>
+                    </c:if>
+
+                </c:forEach>
+            </table>
         </ui:define>
     </ui:composition>
 </html>
