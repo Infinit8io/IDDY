@@ -6,6 +6,7 @@ import src.entities.util.PaginationHelper;
 import src.facades.UsersFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -198,6 +199,20 @@ public class UsersController implements Serializable {
 
     public Users getUsers(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+    
+    public List<String> getFollowers(Users u){
+        List<Friendship> fs = friendshipFacade.getFollowers(u);
+        ArrayList<String> users = new ArrayList<>();
+        
+        for(Friendship f : fs){
+            users.add(f.getFkUser1().getLoginName());
+        }
+        return users;
+    }
+    
+    public Users getByLoginName(String loginname){
+        return ejbFacade.findUserByLoginName(loginname);
     }
     
     public void follow(int followedId){
