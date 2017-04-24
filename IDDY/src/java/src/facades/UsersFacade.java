@@ -5,11 +5,15 @@
  */
 package src.facades;
 
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import src.entities.Friendship;
 import src.entities.Users;
 
 /**
@@ -39,11 +43,14 @@ public class UsersFacade extends AbstractFacade<Users> {
     }
     
     public List<Users> findByName(String search){
+        
         Query usersSearched = em.createNamedQuery("Users.findByName");
         usersSearched.setParameter("search", search);
         
+        
         return (List<Users>)usersSearched.getResultList();
     }
+    
     
     
     public Users findUserByLoginName(String loginName) {
@@ -51,4 +58,5 @@ public class UsersFacade extends AbstractFacade<Users> {
         
         return (Users) users.getSingleResult();
     }
+    
 }

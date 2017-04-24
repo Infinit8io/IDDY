@@ -6,6 +6,8 @@ import src.entities.util.PaginationHelper;
 import src.facades.UsersFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +24,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import src.entities.Friendship;
 import src.entities.Users;
+import src.facades.FriendshipFacade;
 
 @Named("usersController")
 @SessionScoped
@@ -200,38 +203,56 @@ public class UsersController implements Serializable {
     public Users getUsers(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
-    
-    public void follow(int followedId){
+
+    public void follow(int followedId) {
         FacesContext ctx = FacesContext.getCurrentInstance();
         Users follower = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
         Users followed = ejbFacade.find(followedId);
-        
+
         Friendship newFriends = new Friendship();
         newFriends.setFkUser1(follower);
         newFriends.setFkUser2(followed);
         newFriends.setState(1);
-        
+
         friendshipFacade.create(newFriends);
     }
-    
-    public void unfollow(int followedId){
+
+    public void unfollow(int followedId) {
         FacesContext ctx = FacesContext.getCurrentInstance();
         Users follower = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
         Users followed = ejbFacade.find(followedId);
-        
+
         Friendship sadOldFriendship = friendshipFacade.getByBothParts(follower, followed);
         friendshipFacade.remove(sadOldFriendship);
     }
-    
-    public List<Users> getAll(){
+
+    public List<Users> getAll() {
         return ejbFacade.findAll();
     }
-    
-    public List<Users> getUsersSearch(String search){
-        if(search == ""){
-            return ejbFacade.findAll();
-        }else{
+
+    public List<Users> getUsersSearch(String search, String nofriend) {
+        if (nofriend == "") {
             return ejbFacade.findByName('%' + search + '%');
+        } else {
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            Users user = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
+            
+            List<Users> us = ejbFacade.findByName('%' + search + '%');
+         
+            List<Friendship> fs = friendshipFacade.getFolloweds(user);
+            ArrayList<Integer> users = new ArrayList<>();
+            
+            for (Friendship f : fs) {
+                users.add(f.getFkUser2().getId());
+            }
+
+            for (Iterator<Users> iter = us.listIterator(); iter.hasNext();) {
+                Users u = iter.next();
+                if (users.contains(u.getId())) {
+                    iter.remove();
+                }
+            }
+            return us;
         }
     }
 
@@ -274,7 +295,7 @@ public class UsersController implements Serializable {
         }
 
     }
-    
+
     public Users getLoggedUser() {
         String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
         System.out.println(remoteUser);
@@ -283,7 +304,7 @@ public class UsersController implements Serializable {
         }
         return current;
     }
-    
+
     public void logout() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -294,11 +315,11 @@ public class UsersController implements Serializable {
         }
 
     }
-    
-    public boolean isActualUser(int uid){
+
+    public boolean isActualUser(int uid) {
         FacesContext ctx = FacesContext.getCurrentInstance();
         Users actualUser = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
-        if(uid == actualUser.getId()){
+        if (uid == actualUser.getId()) {
             return true;
         } else {
             return false;

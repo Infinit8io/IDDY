@@ -15,7 +15,7 @@
                 <h3>Liste des users</h3>
                 <form method="get" class="form-inline">
                     <input type="text" name="search" id="search" class="form-control mr-2" value="#{param['search']}"/>
-                    <input class="form-check" type="checkbox" name="nofriend"/><span class="ml-2 mr-2">Non-ami</span>
+                    <input class="form-check" type="checkbox" name="nofriend" value="checked" checked="#{param['nofriend']}"/><span class="ml-2 mr-2">Non-ami</span>
                     <input type="submit" class="btn btn-success"/>
                 </form>
                 <table class="table">
@@ -24,7 +24,7 @@
                         <th>Biographie</th>
                         <th>Follow</th>
                     </tr>
-                    <c:forEach var="u" items="#{usersController.getUsersSearch(param['search'])}">
+                    <c:forEach var="u" items="#{usersController.getUsersSearch(param['search'], param['nofriend'])}">
                         <c:if test="#{!usersController.isActualUser(u.getId())}">
                             <tr>
                                 <td><span class="lead">#{u.loginName}</span></td>
