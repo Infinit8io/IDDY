@@ -6,6 +6,7 @@ import src.entities.util.PaginationHelper;
 import src.facades.UsersFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.entities.Friendship;
 import src.entities.Users;
 
 @Named("usersController")
@@ -29,6 +31,8 @@ public class UsersController implements Serializable {
     private DataModel items = null;
     @EJB
     private src.facades.UsersFacade ejbFacade;
+    @EJB
+    private src.facades.FriendshipFacade friendshipFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -196,6 +200,32 @@ public class UsersController implements Serializable {
     public Users getUsers(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public void follow(int followedId){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Users follower = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
+        Users followed = ejbFacade.find(followedId);
+        
+        Friendship newFriends = new Friendship();
+        newFriends.setFkUser1(follower);
+        newFriends.setFkUser2(followed);
+        newFriends.setState(1);
+        
+        friendshipFacade.create(newFriends);
+    }
+    
+    public void unfollow(int followedId){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Users follower = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
+        Users followed = ejbFacade.find(followedId);
+        
+        Friendship sadOldFriendship = friendshipFacade.getByBothParts(follower, followed);
+        friendshipFacade.remove(sadOldFriendship);
+    }
+    
+    public List<Users> getAll(){
+        return ejbFacade.findAll();
+    }
 
     @FacesConverter(forClass = Users.class)
     public static class UsersControllerConverter implements Converter {
@@ -255,6 +285,16 @@ public class UsersController implements Serializable {
             Logger.getLogger(UsersController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public boolean isActualUser(int uid){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Users actualUser = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
+        if(uid == actualUser.getId()){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

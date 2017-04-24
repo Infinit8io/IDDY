@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.entities.Users;
 
 @Named("friendshipController")
 @SessionScoped
@@ -26,6 +27,8 @@ public class FriendshipController implements Serializable {
     private DataModel items = null;
     @EJB
     private src.facades.FriendshipFacade ejbFacade;
+    @EJB
+    private src.facades.UsersFacade usersFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -190,6 +193,17 @@ public class FriendshipController implements Serializable {
 
     public Friendship getFriendship(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+    
+    public boolean isFollowing(int uid){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Users actualUser = usersFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
+        for(Friendship f : ejbFacade.getFolloweds(actualUser)){
+            if(f.getFkUser2().getId() == uid){
+                return true;
+            }
+        }
+        return false;
     }
 
     @FacesConverter(forClass = Friendship.class)
