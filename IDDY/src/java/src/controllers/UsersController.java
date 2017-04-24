@@ -226,6 +226,14 @@ public class UsersController implements Serializable {
     public List<Users> getAll(){
         return ejbFacade.findAll();
     }
+    
+    public List<Users> getUsersSearch(String search){
+        if(search == ""){
+            return ejbFacade.findAll();
+        }else{
+            return ejbFacade.findByName('%' + search + '%');
+        }
+    }
 
     @FacesConverter(forClass = Users.class)
     public static class UsersControllerConverter implements Converter {
