@@ -6,6 +6,7 @@ import src.controllers.util.PaginationHelper;
 import src.facades.ChallengesUsersFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -81,6 +82,8 @@ public class ChallengesUsersController implements Serializable {
 
     public String create() {
         try {
+            Date date = new Date();
+            current.setDatetimeCreate(date);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ChallengesUsersCreated"));
             return prepareCreate();
@@ -100,7 +103,7 @@ public class ChallengesUsersController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ChallengesUsersUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

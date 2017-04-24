@@ -11,35 +11,43 @@
             <h:outputText value="Utilisateurs"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h3>Liste des users</h3>
+            <div class="container">
+                <h3>Liste des users</h3>
+                <form method="get" class="form-inline">
+                    <input type="text" name="search" id="search" class="form-control mr-2" value="#{param['search']}"/>
+                    <input class="form-check" type="checkbox" name="nofriend"/><span class="ml-2 mr-2">Non-ami</span>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+                <table class="table">
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Biographie</th>
+                        <th>Follow</th>
+                    </tr>
+                    <c:forEach var="u" items="#{usersController.getUsersSearch(param['search'])}">
+                        <c:if test="#{!usersController.isActualUser(u.getId())}">
+                            <tr>
+                                <td><span class="lead">#{u.loginName}</span></td>
+                                <td>#{u.bio}</td>
+                                <td>
+                                    <h:form>
+                                        <c:choose>
+                                            <c:when test="#{friendshipController.isFollowing(u.id)}">
+                                                <h:commandLink value="Unfollow" class="btn btn-danger" action="#{usersController.unfollow(u.id)}" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <h:commandLink value="Follow" class="btn btn-success" action="#{usersController.follow(u.id)}" />
+                                            </c:otherwise>
+                                        </c:choose>
 
-            <table class="table">
-                <tr>
-                    <th>User name</th>
-                    <th>Follow</th>
-                </tr>
-                <c:forEach var="u" items="#{usersController.getAll()}">
-                    <c:if test="#{!usersController.isActualUser(u.getId())}">
-                        <tr>
-                            <td><span class="lead">#{u.loginName}</span></td>
-                            <td>
-                                <h:form>
-                                    <c:choose>
-                                        <c:when test="#{friendshipController.isFollowing(u.id)}">
-                                            <h:commandLink value="Unfollow" class="btn btn-danger" action="#{usersController.unfollow(u.id)}" />
-                                        </c:when>
-                                        <c:otherwise>
-                                            <h:commandLink value="Follow" class="btn btn-success" action="#{usersController.follow(u.id)}" />
-                                        </c:otherwise>
-                                    </c:choose>
-                                    
-                                </h:form>
-                            </td>
-                        </tr>
-                    </c:if>
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </table>
+            </div>
 
-                </c:forEach>
-            </table>
         </ui:define>
     </ui:composition>
 </html>

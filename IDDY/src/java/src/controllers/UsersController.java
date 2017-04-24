@@ -54,7 +54,7 @@ public class UsersController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(2) {
 
                 @Override
                 public int getItemsCount() {
@@ -107,9 +107,10 @@ public class UsersController implements Serializable {
 
     public String update() {
         try {
+            current.setPassword(JsfUtil.digest("SHA-256", current.getPassword()));
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -239,6 +240,14 @@ public class UsersController implements Serializable {
     
     public List<Users> getAll(){
         return ejbFacade.findAll();
+    }
+    
+    public List<Users> getUsersSearch(String search){
+        if(search == ""){
+            return ejbFacade.findAll();
+        }else{
+            return ejbFacade.findByName('%' + search + '%');
+        }
     }
 
     @FacesConverter(forClass = Users.class)

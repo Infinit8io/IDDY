@@ -10,28 +10,20 @@
             <h:outputText value="#{bundle.EditDifficultiesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
+            <div class="container">
+                <h2>Modification d'une difficulté</h2>
+                <hr/>
+                <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditDifficultiesLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{difficultiesController.selected.id}" title="#{bundle.EditDifficultiesTitle_id}" required="true" requiredMessage="#{bundle.EditDifficultiesRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditDifficultiesLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{difficultiesController.selected.title}" title="#{bundle.EditDifficultiesTitle_title}" required="true" requiredMessage="#{bundle.EditDifficultiesRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.EditDifficultiesLabel_points}" for="points" />
-                    <h:inputText id="points" value="#{difficultiesController.selected.points}" title="#{bundle.EditDifficultiesTitle_points}" required="true" requiredMessage="#{bundle.EditDifficultiesRequiredMessage_points}"/>
+                    <h:outputLabel class="pr-4" value="#{bundle.EditDifficultiesLabel_title}" for="title" />
+                    <h:inputText class="form-control" id="title" value="#{difficultiesController.selected.title}" title="#{bundle.EditDifficultiesTitle_title}" required="true" requiredMessage="#{bundle.EditDifficultiesRequiredMessage_title}"/>
+                    <h:outputLabel class="pr-4" value="#{bundle.EditDifficultiesLabel_points}" for="points" />
+                    <h:inputText class="form-control" id="points" value="#{difficultiesController.selected.points}" title="#{bundle.EditDifficultiesTitle_points}" required="true" requiredMessage="#{bundle.EditDifficultiesRequiredMessage_points}"/>
                 </h:panelGrid>
-                <h:commandLink action="#{difficultiesController.update}" value="#{bundle.EditDifficultiesSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditDifficultiesViewLink}"/>
-                <br />
-                <h:commandLink action="#{difficultiesController.prepareList}" value="#{bundle.EditDifficultiesShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditDifficultiesIndexLink}" />
+                <h:commandLink class="btn btn-success" action="#{difficultiesController.update}" value="#{bundle.EditDifficultiesSaveLink}"/>
+                <h:commandLink class="btn btn-danger ml-1" action="#{difficultiesController.prepareList}" value="#{bundle.EditDifficultiesShowAllLink}" immediate="true"/>
             </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

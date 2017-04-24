@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <!-- CSS -->
-        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <!--<h:outputStylesheet library="css" name="jsfcrud.css"/>-->
         <h:outputStylesheet library="css" name="bootstrap.css"/>
         <h:outputStylesheet library="css" name="iddy.css" />
         <!-- JS -->
@@ -59,7 +59,7 @@
                 </ul>
             </div>
         </nav>
-        <h:panelGroup id="messagePanel" layout="block">
+        <h:panelGroup class="mb-4" id="messagePanel" layout="block">
             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
         </h:panelGroup>
         <ui:insert name="body">Default Body</ui:insert>

@@ -48,8 +48,7 @@ public class ChallengesUsers implements Serializable {
     @NotNull
     @Column(name = "state")
     private int state;
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "datetime_create")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datetimeCreate;
@@ -57,7 +56,7 @@ public class ChallengesUsers implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date datetimeDone;
     @JoinColumn(name = "fk_giver", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Users fkGiver;
     @JoinColumn(name = "fk_getter", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -65,7 +64,7 @@ public class ChallengesUsers implements Serializable {
     @JoinColumn(name = "fk_chall", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Challenges fkChall;
-
+    
     public ChallengesUsers() {
     }
 
@@ -134,7 +133,7 @@ public class ChallengesUsers implements Serializable {
     public void setFkChall(Challenges fkChall) {
         this.fkChall = fkChall;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

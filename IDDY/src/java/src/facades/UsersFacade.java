@@ -38,6 +38,13 @@ public class UsersFacade extends AbstractFacade<Users> {
         return (List<Users>)allUsers.getResultList();
     }
     
+    public List<Users> findByName(String search){
+        Query usersSearched = em.createNamedQuery("Users.findByName");
+        usersSearched.setParameter("search", search);
+        
+        return (List<Users>)usersSearched.getResultList();
+    }
+    
     
     public Users findUserByLoginName(String loginName) {
         Query users = em.createNamedQuery("Users.findByLoginName").setParameter("loginName", loginName);

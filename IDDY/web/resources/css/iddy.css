@@ -12,7 +12,16 @@ body, html{
     height: 100vh;
 }
 
-
+.th-perso{
+    vertical-align: bottom;
+    border-bottom: 2px solid #eceeef;
+    color: #fff;
+    background-color: #292b2c;
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #eceeef;
+    text-align: left;
+}
 .img-bg{
     background-image: url("#{resource['img/bg-img.jpg']}");
     height: 100vh;
@@ -21,9 +30,9 @@ body, html{
 }
 
 .bg-filter{
-   background-color: rgba(0,0,0,.5);
-   width: 100%; 
-   height: 100%;
+    background-color: rgba(0,0,0,.5);
+    width: 100%; 
+    height: 100%;
 }
 
 .bg-filter h1{

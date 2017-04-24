@@ -10,40 +10,32 @@
             <h:outputText value="#{bundle.EditChallengesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditChallengesLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{challengesController.selected.id}" title="#{bundle.EditChallengesTitle_id}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditChallengesLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{challengesController.selected.title}" title="#{bundle.EditChallengesTitle_title}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.EditChallengesLabel_description}" for="description" />
-                    <h:inputTextarea rows="4" cols="30" id="description" value="#{challengesController.selected.description}" title="#{bundle.EditChallengesTitle_description}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_description}"/>
-                    <h:outputLabel value="#{bundle.EditChallengesLabel_fkCat}" for="fkCat" />
-                    <h:selectOneMenu id="fkCat" value="#{challengesController.selected.fkCat}" title="#{bundle.EditChallengesTitle_fkCat}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_fkCat}">
-                        <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditChallengesLabel_fkDiff}" for="fkDiff" />
-                    <h:selectOneMenu id="fkDiff" value="#{challengesController.selected.fkDiff}" title="#{bundle.EditChallengesTitle_fkDiff}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_fkDiff}">
-                        <f:selectItems value="#{difficultiesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditChallengesLabel_fkUser}" for="fkUser" />
-                    <h:selectOneMenu id="fkUser" value="#{challengesController.selected.fkUser}" title="#{bundle.EditChallengesTitle_fkUser}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_fkUser}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{challengesController.update}" value="#{bundle.EditChallengesSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditChallengesViewLink}"/>
-                <br />
-                <h:commandLink action="#{challengesController.prepareList}" value="#{bundle.EditChallengesShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditChallengesIndexLink}" />
-            </h:form>
+            <div class="container">
+                <h2>Modification d'un challenge</h2>
+                <hr/>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel class="ptr-4" value="#{bundle.EditChallengesLabel_title}" for="title" />
+                        <h:inputText class="form-control" id="title" value="#{challengesController.selected.title}" title="#{bundle.EditChallengesTitle_title}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_title}"/>
+                        <h:outputLabel class="ptr-4" value="#{bundle.EditChallengesLabel_description}" for="description" />
+                        <h:inputTextarea class="form-control" rows="4" cols="30" id="description" value="#{challengesController.selected.description}" title="#{bundle.EditChallengesTitle_description}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_description}"/>
+                        <h:outputLabel class="ptr-4" value="#{bundle.EditChallengesLabel_fkCat}" for="fkCat" />
+                        <h:selectOneMenu class="form-control" id="fkCat" value="#{challengesController.selected.fkCat}" title="#{bundle.EditChallengesTitle_fkCat}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_fkCat}">
+                            <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel class="ptr-4" value="#{bundle.EditChallengesLabel_fkDiff}" for="fkDiff" />
+                        <h:selectOneMenu class="form-control" id="fkDiff" value="#{challengesController.selected.fkDiff}" title="#{bundle.EditChallengesTitle_fkDiff}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_fkDiff}">
+                            <f:selectItems value="#{difficultiesController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel class="ptr-4" value="#{bundle.EditChallengesLabel_fkUser}" for="fkUser" />
+                        <h:selectOneMenu class="form-control" id="fkUser" value="#{challengesController.selected.fkUser}" title="#{bundle.EditChallengesTitle_fkUser}" required="true" requiredMessage="#{bundle.EditChallengesRequiredMessage_fkUser}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandLink class="btn btn-success" action="#{challengesController.update}" value="#{bundle.EditChallengesSaveLink}"/>
+                    <h:commandLink class="btn btn-danger" action="#{challengesController.prepareList}" value="#{bundle.EditChallengesShowAllLink}" immediate="true"/>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

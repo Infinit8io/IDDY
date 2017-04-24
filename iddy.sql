@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 21 Avril 2017 à 08:10
+-- Généré le :  Lun 24 Avril 2017 à 08:15
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `title` varchar(25) CHARACTER SET latin1 NOT NULL,
-  `description` text CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `title` varchar(25) NOT NULL,
+  `description` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `categories`
@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `title`, `description`) VALUES
 (1, 'Social', 'Social '),
 (2, 'Lifestyle', 'Lifestyle'),
-(3, 'Try new things', 'Try new things'),
+(3, 'Try New Things', 'The point of trying something else is to experiment the future.'),
 (4, 'WTF', 'What the fuck ?'),
 (5, 'nsfw', 'Not safe for work');
 
@@ -51,19 +51,20 @@ INSERT INTO `categories` (`id`, `title`, `description`) VALUES
 
 CREATE TABLE `challenges` (
   `id` int(11) NOT NULL,
-  `fk_user` int(11) NOT NULL,
-  `title` varchar(25) CHARACTER SET latin1 NOT NULL,
-  `description` text CHARACTER SET latin1 NOT NULL,
+  `fk_user` int(11) DEFAULT NULL,
+  `title` varchar(25) NOT NULL,
+  `description` mediumtext NOT NULL,
   `fk_cat` int(11) NOT NULL,
   `fk_diff` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `challenges`
 --
 
 INSERT INTO `challenges` (`id`, `fk_user`, `title`, `description`, `fk_cat`, `fk_diff`) VALUES
-(1, 3, 'Challenge de test', 'Ceci est un challenge de test', 1, 1);
+(1, 3, 'Challenge de test', 'Ceci est un challenge de test.', 1, 1),
+(3, NULL, 'Ceci est un test', 'Il faudra réaliser une application JEE. Bonne chance', 3, 4);
 
 -- --------------------------------------------------------
 
@@ -74,12 +75,21 @@ INSERT INTO `challenges` (`id`, `fk_user`, `title`, `description`, `fk_cat`, `fk
 CREATE TABLE `challenges_users` (
   `id` int(11) NOT NULL,
   `fk_chall` int(11) NOT NULL,
-  `fk_giver` int(11) NOT NULL,
+  `fk_giver` int(11) DEFAULT NULL,
   `fk_getter` int(11) NOT NULL,
   `state` int(11) NOT NULL DEFAULT '0',
-  `datetime_create` datetime NOT NULL,
+  `datetime_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `datetime_done` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contenu de la table `challenges_users`
+--
+
+INSERT INTO `challenges_users` (`id`, `fk_chall`, `fk_giver`, `fk_getter`, `state`, `datetime_create`, `datetime_done`) VALUES
+(1, 1, 1, 2, 0, '2017-04-24 09:30:37', NULL),
+(3, 1, 4, 3, 0, '2017-04-24 09:45:43', NULL),
+(4, 1, 1, 2, 1, '2017-04-24 09:59:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -91,7 +101,7 @@ CREATE TABLE `difficulties` (
   `id` int(11) NOT NULL,
   `title` varchar(25) CHARACTER SET latin1 NOT NULL,
   `points` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `difficulties`
@@ -102,7 +112,8 @@ INSERT INTO `difficulties` (`id`, `title`, `points`) VALUES
 (2, 'Easy', 50),
 (3, 'Normal', 100),
 (4, 'Hard', 200),
-(5, 'God', 500);
+(5, 'God', 500),
+(7, 'lol', 50);
 
 -- --------------------------------------------------------
 
@@ -115,7 +126,7 @@ CREATE TABLE `friendship` (
   `fk_user1` int(11) NOT NULL,
   `fk_user2` int(11) NOT NULL,
   `state` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -146,7 +157,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `bio` varchar(140) CHARACTER SET latin1 NOT NULL,
+  `bio` varchar(140) CHARACTER SET utf8mb4 NOT NULL,
   `login_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -155,11 +166,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `password`, `email`, `bio`, `login_name`) VALUES
-(1, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user1@gmail.com', 'biographie frere', 'user1'),
+(1, '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user1@gmail.com', 'biographie frere', 'user1'),
 (2, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user2@gmail.com', 'biographie frere', 'user2'),
 (3, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user3@gmail.com', 'biographie frere', 'user3'),
 (4, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'user4@gmail.com', 'biographie frere', 'user4'),
-(11, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'bryan.muhmenthaler@gmail.com', 'Ceci est ma belle biographie.', 'bryan');
+(5, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 'diogo@diogo.com', 'Ceci est ma biographie', 'diogo');
 
 -- --------------------------------------------------------
 
@@ -258,17 +269,17 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `challenges`
 --
 ALTER TABLE `challenges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `challenges_users`
 --
 ALTER TABLE `challenges_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `difficulties`
 --
 ALTER TABLE `difficulties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `friendship`
 --
@@ -283,7 +294,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Contraintes pour les tables exportées
 --

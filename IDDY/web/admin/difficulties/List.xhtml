@@ -10,52 +10,47 @@
             <h:outputText value="#{bundle.ListDifficultiesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListDifficultiesEmpty}" rendered="#{difficultiesController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{difficultiesController.items.rowCount > 0}">
-                    <h:outputText value="#{difficultiesController.pagination.pageFirstItem + 1}..#{difficultiesController.pagination.pageLastItem + 1}/#{difficultiesController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{difficultiesController.previous}" value="#{bundle.Previous} #{difficultiesController.pagination.pageSize}" rendered="#{difficultiesController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{difficultiesController.next}" value="#{bundle.Next} #{difficultiesController.pagination.pageSize}" rendered="#{difficultiesController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{difficultiesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDifficultiesTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDifficultiesTitle_title}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.title}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDifficultiesTitle_points}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.points}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{difficultiesController.prepareView}" value="#{bundle.ListDifficultiesViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{difficultiesController.prepareEdit}" value="#{bundle.ListDifficultiesEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{difficultiesController.destroy}" value="#{bundle.ListDifficultiesDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{difficultiesController.prepareCreate}" value="#{bundle.ListDifficultiesCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListDifficultiesIndexLink}"/>
-            </h:form>
+            <div class="container">
+                <h2>Liste des difficultés</h2>
+                <hr/>
+                <h:form>
+                    <h:outputText escape="false" value="#{bundle.ListDifficultiesEmpty}" rendered="#{difficultiesController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{difficultiesController.items.rowCount > 0}">
+                        <h:outputText value="#{difficultiesController.pagination.pageFirstItem + 1}..#{difficultiesController.pagination.pageLastItem + 1}/#{difficultiesController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{difficultiesController.previous}" value="#{bundle.Previous} #{difficultiesController.pagination.pageSize}" rendered="#{difficultiesController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{difficultiesController.next}" value="#{bundle.Next} #{difficultiesController.pagination.pageSize}" rendered="#{difficultiesController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{difficultiesController.items}" var="item" class="table" headerClass="th-perso">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListDifficultiesTitle_id}"/>
+                                </f:facet>
+                                <h:outputText style="font-weight: bold;" value="#{item.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListDifficultiesTitle_title}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.title}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListDifficultiesTitle_points}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.points}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-sm btn-warning ml-1" action="#{difficultiesController.prepareEdit}" value="#{bundle.ListDifficultiesEditLink}"/>
+                                <h:commandLink class="btn btn-sm btn-danger ml-1" action="#{difficultiesController.destroy}" value="#{bundle.ListDifficultiesDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <h:commandLink class="btn btn-success" action="#{difficultiesController.prepareCreate}" value="#{bundle.ListDifficultiesCreateLink}"/>
+                    <h:link class="btn btn-info ml-1" outcome="/admin/index" value="#{bundle.ListDifficultiesIndexLink}"/>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 
