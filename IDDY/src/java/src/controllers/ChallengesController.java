@@ -6,6 +6,8 @@ import src.controllers.util.PaginationHelper;
 import src.facades.ChallengesFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +19,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.entities.Categories;
+import src.entities.Difficulties;
 
 @Named("challengesController")
 @SessionScoped
@@ -26,8 +30,23 @@ public class ChallengesController implements Serializable {
     private DataModel items = null;
     @EJB
     private src.facades.ChallengesFacade ejbFacade;
+    @EJB
+    private src.facades.CategoriesFacade catFacade;
+    @EJB
+    private src.facades.DifficultiesFacade difFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private String nc_UsrName;
+    private String nc_CatName;
+    private String nc_DifName;
+    private String nc_Title;
+    private String nc_Desc;
+    
+    
+    private void nc_Submit(){
+        System.out.println("I am a button");
+    }
 
     public ChallengesController() {
     }
@@ -190,6 +209,22 @@ public class ChallengesController implements Serializable {
 
     public Challenges getChallenges(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+    
+    public List<String> getAllCategoriesStr(){
+        ArrayList<String> strs = new ArrayList<>();
+        for(Categories c : catFacade.findAll()){
+            strs.add(c.getTitle());
+        }
+        return strs;
+    }
+    
+    public List<String> getAllDifficultiesStr(){
+        ArrayList<String> strs = new ArrayList<>();
+        for(Difficulties c : difFacade.findAll()){
+            strs.add(c.getTitle());
+        }
+        return strs;
     }
 
     @FacesConverter(forClass = Challenges.class)
