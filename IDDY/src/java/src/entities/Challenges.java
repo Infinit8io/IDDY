@@ -162,5 +162,9 @@ public class Challenges implements Serializable {
     public String toString() {
         return "src.entities.Challenges[ id=" + id + " ]";
     }
+
+    public void setChallengesUsersCollection(ChallengesUsers[] culCol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

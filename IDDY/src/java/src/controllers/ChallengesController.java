@@ -7,6 +7,7 @@ import src.facades.ChallengesFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -20,7 +21,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import src.entities.Categories;
+import src.entities.ChallengesUsers;
 import src.entities.Difficulties;
+import src.entities.Users;
 
 @Named("challengesController")
 @SessionScoped
@@ -34,8 +37,13 @@ public class ChallengesController implements Serializable {
     private src.facades.CategoriesFacade catFacade;
     @EJB
     private src.facades.DifficultiesFacade difFacade;
+    @EJB
+    private src.facades.UsersFacade usrFacade;
+    @EJB
+    private src.facades.ChallengesUsersFacade culFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
     
     private String nc_UsrName;
     private String nc_CatName;
@@ -44,9 +52,70 @@ public class ChallengesController implements Serializable {
     private String nc_Desc;
     
     
-    private void nc_Submit(){
-        System.out.println("I am a button");
+    public void nc_Submit(){
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        Users giver = usrFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
+        Users getter = usrFacade.findUserByLoginName(nc_UsrName);
+        Challenges newChal = new Challenges();
+        newChal.setTitle(nc_Title);
+        newChal.setDescription(nc_Desc);
+        newChal.setFkUser(giver);
+        newChal.setFkDiff(difFacade.getByTitle(nc_DifName));
+        newChal.setFkCat(catFacade.getByCatName(nc_CatName));
+        
+        ejbFacade.create(newChal);
+        
+        ChallengesUsers cul = new ChallengesUsers();
+        cul.setFkChall(newChal);
+        cul.setFkGetter(getter);
+        cul.setFkGiver(giver);
+        cul.setState(0);
+        cul.setDatetimeCreate(new Date());
+        culFacade.create(cul);
+        
     }
+
+    public String getNc_UsrName() {
+        return nc_UsrName;
+    }
+
+    public void setNc_UsrName(String nc_UsrName) {
+        this.nc_UsrName = nc_UsrName;
+    }
+
+    public String getNc_CatName() {
+        return nc_CatName;
+    }
+
+    public void setNc_CatName(String nc_CatName) {
+        this.nc_CatName = nc_CatName;
+    }
+
+    public String getNc_DifName() {
+        return nc_DifName;
+    }
+
+    public void setNc_DifName(String nc_DifName) {
+        this.nc_DifName = nc_DifName;
+    }
+
+    public String getNc_Title() {
+        return nc_Title;
+    }
+
+    public void setNc_Title(String nc_Title) {
+        this.nc_Title = nc_Title;
+    }
+
+    public String getNc_Desc() {
+        return nc_Desc;
+    }
+
+    public void setNc_Desc(String nc_Desc) {
+        this.nc_Desc = nc_Desc;
+    }
+    
+    
 
     public ChallengesController() {
     }

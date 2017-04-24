@@ -38,6 +38,12 @@ public class FriendshipFacade extends AbstractFacade<Friendship> {
         return fs.getResultList();
     }
     
+    public List<Friendship> getFollowers(Users followed){
+        Query fs = em.createNamedQuery("Friendship.findByFollowed").setParameter("other", followed);
+        
+        return fs.getResultList();
+    }
+    
     public Friendship getByBothParts(Users follower, Users followed){
         Query fs = em.createNamedQuery("Friendship.findByBothParts").setParameter("user1", follower).setParameter("user2", followed);
         return (Friendship)fs.getSingleResult();
