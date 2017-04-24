@@ -160,7 +160,7 @@ public class Challenges implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.Challenges[ id=" + id + " ]";
+        return ""+title;
     }
     
 }

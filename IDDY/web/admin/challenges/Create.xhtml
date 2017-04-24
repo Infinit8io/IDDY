@@ -10,39 +10,29 @@
             <h:outputText value="#{bundle.CreateChallengesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateChallengesLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{challengesController.selected.id}" title="#{bundle.CreateChallengesTitle_id}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateChallengesLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{challengesController.selected.title}" title="#{bundle.CreateChallengesTitle_title}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.CreateChallengesLabel_description}" for="description" />
-                    <h:inputTextarea rows="4" cols="30" id="description" value="#{challengesController.selected.description}" title="#{bundle.CreateChallengesTitle_description}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_description}"/>
-                    <h:outputLabel value="#{bundle.CreateChallengesLabel_fkCat}" for="fkCat" />
-                    <h:selectOneMenu id="fkCat" value="#{challengesController.selected.fkCat}" title="#{bundle.CreateChallengesTitle_fkCat}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_fkCat}">
-                        <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateChallengesLabel_fkDiff}" for="fkDiff" />
-                    <h:selectOneMenu id="fkDiff" value="#{challengesController.selected.fkDiff}" title="#{bundle.CreateChallengesTitle_fkDiff}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_fkDiff}">
-                        <f:selectItems value="#{difficultiesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateChallengesLabel_fkUser}" for="fkUser" />
-                    <h:selectOneMenu id="fkUser" value="#{challengesController.selected.fkUser}" title="#{bundle.CreateChallengesTitle_fkUser}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_fkUser}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{challengesController.create}" value="#{bundle.CreateChallengesSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{challengesController.prepareList}" value="#{bundle.CreateChallengesShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateChallengesIndexLink}"/>
-            </h:form>
+            <div class="container">
+                <h2>Ajout d'un challenge</h2>
+                <hr/>
+                <h:form>
+                    <h:panelGrid columns="2" style="margin-bottom: 1rem;">
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesLabel_title}" for="title" />
+                        <h:inputText class="form-control" id="title" value="#{challengesController.selected.title}" title="#{bundle.CreateChallengesTitle_title}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_title}"/>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesLabel_description}" for="description" />
+                        <h:inputTextarea class="form-control" rows="4" cols="30" id="description" value="#{challengesController.selected.description}" title="#{bundle.CreateChallengesTitle_description}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_description}"/>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesLabel_fkCat}" for="fkCat" />
+                        <h:selectOneMenu class="form-control" id="fkCat" value="#{challengesController.selected.fkCat}" title="#{bundle.CreateChallengesTitle_fkCat}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_fkCat}">
+                            <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesLabel_fkDiff}" for="fkDiff" />
+                        <h:selectOneMenu class="form-control" id="fkDiff" value="#{challengesController.selected.fkDiff}" title="#{bundle.CreateChallengesTitle_fkDiff}" required="true" requiredMessage="#{bundle.CreateChallengesRequiredMessage_fkDiff}">
+                            <f:selectItems value="#{difficultiesController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandLink class="btn btn-success" action="#{challengesController.create}" value="#{bundle.CreateChallengesSaveLink}" />
+                    <h:commandLink class="btn btn-danger ml-1" action="#{challengesController.prepareList}" value="#{bundle.CreateChallengesShowAllLink}" immediate="true"/>
+                </h:form>
+            </div>
+
         </ui:define>
     </ui:composition>
 

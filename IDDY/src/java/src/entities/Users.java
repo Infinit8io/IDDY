@@ -140,7 +140,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.Users[ id=" + id + " ]";
+        return ""+loginName;
     }
     
 }

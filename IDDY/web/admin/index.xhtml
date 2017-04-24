@@ -10,16 +10,28 @@
             <h:outputText value="Administration"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h1>Bienvenue sur l'admin</h1>
-            <br />
-            <h:link outcome="/admin/categories/List" value="Show All Categories Items"/>
-            <br />
-            <h:link outcome="/admin/challenges/List" value="Show All Challenges Items"/>
-            <br />
-            <h:link outcome="/admin/difficulties/List" value="Show All Difficulties Items"/>
-            <br />
-            <h:link outcome="/admin/users/List" value="Show All Users Items"/>
-            <br />
+            <div class="container">
+                <h1>Administration</h1>
+                <p>Bienvenue dans l'administration !</p>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h:link outcome="/admin/users/List" value="Liste des utilisateurs"/>
+                    </li>
+                    <li class="list-group-item">
+                        <h:link outcome="/admin/challenges/List" value="Liste des challenges"/>
+                    </li>
+                    <li class="list-group-item">
+                        <h:link outcome="/admin/challengesUsers/List" value="Liste challenges donnés aux utilisateurs" />
+                    </li>
+                    <li class="list-group-item">
+                        <h:link outcome="/admin/categories/List" value="Liste des catégories"/>
+                    </li>
+                    <li class="list-group-item">
+                        <h:link outcome="/admin/difficulties/List" value="Liste des difficultés"/>
+                    </li>
+                </ul>
+             
+            </div>
         </ui:define>
     </ui:composition>
 </html>

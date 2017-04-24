@@ -10,27 +10,20 @@
             <h:outputText value="#{bundle.CreateDifficultiesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateDifficultiesLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{difficultiesController.selected.id}" title="#{bundle.CreateDifficultiesTitle_id}" required="true" requiredMessage="#{bundle.CreateDifficultiesRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateDifficultiesLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{difficultiesController.selected.title}" title="#{bundle.CreateDifficultiesTitle_title}" required="true" requiredMessage="#{bundle.CreateDifficultiesRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.CreateDifficultiesLabel_points}" for="points" />
-                    <h:inputText id="points" value="#{difficultiesController.selected.points}" title="#{bundle.CreateDifficultiesTitle_points}" required="true" requiredMessage="#{bundle.CreateDifficultiesRequiredMessage_points}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{difficultiesController.create}" value="#{bundle.CreateDifficultiesSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{difficultiesController.prepareList}" value="#{bundle.CreateDifficultiesShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateDifficultiesIndexLink}"/>
-            </h:form>
+            <div class="container">
+                <h2>Ajout d'une difficulté</h2>
+                <hr/>
+                <h:form>
+                    <h:panelGrid columns="2" class="mb-4">
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateDifficultiesLabel_title}" for="title" />
+                        <h:inputText class="form-control" id="title" value="#{difficultiesController.selected.title}" title="#{bundle.CreateDifficultiesTitle_title}" required="true" requiredMessage="#{bundle.CreateDifficultiesRequiredMessage_title}"/>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateDifficultiesLabel_points}" for="points" />
+                        <h:inputText class="form-control" id="points" value="#{difficultiesController.selected.points}" title="#{bundle.CreateDifficultiesTitle_points}" required="true" requiredMessage="#{bundle.CreateDifficultiesRequiredMessage_points}"/>
+                    </h:panelGrid>
+                    <h:commandLink class="btn btn-success" action="#{difficultiesController.create}" value="#{bundle.CreateDifficultiesSaveLink}" />
+                    <h:commandLink class="btn btn-danger ml-1" action="#{difficultiesController.prepareList}" value="#{bundle.CreateDifficultiesShowAllLink}" immediate="true"/>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

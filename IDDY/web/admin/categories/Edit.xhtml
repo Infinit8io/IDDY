@@ -10,28 +10,20 @@
             <h:outputText value="#{bundle.EditCategoriesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditCategoriesLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{categoriesController.selected.id}" title="#{bundle.EditCategoriesTitle_id}" required="true" requiredMessage="#{bundle.EditCategoriesRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditCategoriesLabel_title}" for="title" />
-                    <h:inputText id="title" value="#{categoriesController.selected.title}" title="#{bundle.EditCategoriesTitle_title}" required="true" requiredMessage="#{bundle.EditCategoriesRequiredMessage_title}"/>
-                    <h:outputLabel value="#{bundle.EditCategoriesLabel_description}" for="description" />
-                    <h:inputTextarea rows="4" cols="30" id="description" value="#{categoriesController.selected.description}" title="#{bundle.EditCategoriesTitle_description}" required="true" requiredMessage="#{bundle.EditCategoriesRequiredMessage_description}"/>
-                </h:panelGrid>
-                <h:commandLink action="#{categoriesController.update}" value="#{bundle.EditCategoriesSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditCategoriesViewLink}"/>
-                <br />
-                <h:commandLink action="#{categoriesController.prepareList}" value="#{bundle.EditCategoriesShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditCategoriesIndexLink}" />
-            </h:form>
+            <div class="container">
+                <h2>Modification d'une catégorie</h2>
+                <hr/>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel class="pr-4" value="#{bundle.EditCategoriesLabel_title}" for="title" />
+                        <h:inputText class="form-control" id="title" value="#{categoriesController.selected.title}" title="#{bundle.EditCategoriesTitle_title}" required="true" requiredMessage="#{bundle.EditCategoriesRequiredMessage_title}"/>
+                        <h:outputLabel class="pr-4" value="#{bundle.EditCategoriesLabel_description}" for="description" />
+                        <h:inputTextarea class="form-control" rows="4" cols="30" id="description" value="#{categoriesController.selected.description}" title="#{bundle.EditCategoriesTitle_description}" required="true" requiredMessage="#{bundle.EditCategoriesRequiredMessage_description}"/>
+                    </h:panelGrid>
+                    <h:commandLink class="btn btn-success" action="#{categoriesController.update}" value="#{bundle.EditCategoriesSaveLink}"/>
+                    <h:commandLink class="btn btn-danger ml-1" action="#{categoriesController.prepareList}" value="#{bundle.EditCategoriesShowAllLink}" immediate="true"/>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

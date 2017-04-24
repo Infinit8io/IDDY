@@ -10,70 +10,65 @@
             <h:outputText value="#{bundle.ListChallengesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListChallengesEmpty}" rendered="#{challengesController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{challengesController.items.rowCount > 0}">
-                    <h:outputText value="#{challengesController.pagination.pageFirstItem + 1}..#{challengesController.pagination.pageLastItem + 1}/#{challengesController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{challengesController.previous}" value="#{bundle.Previous} #{challengesController.pagination.pageSize}" rendered="#{challengesController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{challengesController.next}" value="#{bundle.Next} #{challengesController.pagination.pageSize}" rendered="#{challengesController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{challengesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListChallengesTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListChallengesTitle_title}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.title}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListChallengesTitle_description}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListChallengesTitle_fkCat}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fkCat}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListChallengesTitle_fkDiff}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fkDiff}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListChallengesTitle_fkUser}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fkUser}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{challengesController.prepareView}" value="#{bundle.ListChallengesViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{challengesController.prepareEdit}" value="#{bundle.ListChallengesEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{challengesController.destroy}" value="#{bundle.ListChallengesDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{challengesController.prepareCreate}" value="#{bundle.ListChallengesCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListChallengesIndexLink}"/>
-            </h:form>
+            <div class="container">
+                <h2>Liste des challenges</h2>
+                <hr/>
+                <h:form>
+                    <h:outputText escape="false" value="#{bundle.ListChallengesEmpty}" rendered="#{challengesController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{challengesController.items.rowCount > 0}">
+                        <h:outputText value="#{challengesController.pagination.pageFirstItem + 1}..#{challengesController.pagination.pageLastItem + 1}/#{challengesController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{challengesController.previous}" value="#{bundle.Previous} #{challengesController.pagination.pageSize}" rendered="#{challengesController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{challengesController.next}" value="#{bundle.Next} #{challengesController.pagination.pageSize}" rendered="#{challengesController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{challengesController.items}" var="item" class="table" headerClass="th-perso">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListChallengesTitle_id}"/>
+                                </f:facet>
+                                <h:outputText style="font-weight:bold;" value="#{item.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListChallengesTitle_title}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.title}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListChallengesTitle_description}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.description}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListChallengesTitle_fkCat}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fkCat}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListChallengesTitle_fkDiff}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fkDiff}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListChallengesTitle_fkUser}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fkUser}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-sm btn-warning ml-1" action="#{challengesController.prepareEdit}" value="#{bundle.ListChallengesEditLink}"/>
+                                <h:commandLink class="btn btn-sm btn-danger ml-1" action="#{challengesController.destroy}" value="#{bundle.ListChallengesDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <h:commandLink class="btn btn-success" action="#{challengesController.prepareCreate}" value="#{bundle.ListChallengesCreateLink}"/>
+                    <h:link class="btn btn-info ml-1" outcome="/admin/index" value="#{bundle.ListChallengesIndexLink}"/>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

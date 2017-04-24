@@ -125,7 +125,7 @@ public class Categories implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.Categories[ id=" + id + " ]";
+        return "" + title;
     }
     
 }

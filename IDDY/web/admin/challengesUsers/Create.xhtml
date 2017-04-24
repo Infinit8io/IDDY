@@ -10,45 +10,34 @@
             <h:outputText value="#{bundle.CreateChallengesUsersTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{challengesUsersController.selected.id}" title="#{bundle.CreateChallengesUsersTitle_id}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_state}" for="state" />
-                    <h:inputText id="state" value="#{challengesUsersController.selected.state}" title="#{bundle.CreateChallengesUsersTitle_state}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_state}"/>
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_datetimeCreate}" for="datetimeCreate" />
-                    <h:inputText id="datetimeCreate" value="#{challengesUsersController.selected.datetimeCreate}" title="#{bundle.CreateChallengesUsersTitle_datetimeCreate}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_datetimeCreate}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_datetimeDone}" for="datetimeDone" />
-                    <h:inputText id="datetimeDone" value="#{challengesUsersController.selected.datetimeDone}" title="#{bundle.CreateChallengesUsersTitle_datetimeDone}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_fkGiver}" for="fkGiver" />
-                    <h:selectOneMenu id="fkGiver" value="#{challengesUsersController.selected.fkGiver}" title="#{bundle.CreateChallengesUsersTitle_fkGiver}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkGiver}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_fkGetter}" for="fkGetter" />
-                    <h:selectOneMenu id="fkGetter" value="#{challengesUsersController.selected.fkGetter}" title="#{bundle.CreateChallengesUsersTitle_fkGetter}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkGetter}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateChallengesUsersLabel_fkChall}" for="fkChall" />
-                    <h:selectOneMenu id="fkChall" value="#{challengesUsersController.selected.fkChall}" title="#{bundle.CreateChallengesUsersTitle_fkChall}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkChall}">
-                        <f:selectItems value="#{challengesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{challengesUsersController.create}" value="#{bundle.CreateChallengesUsersSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{challengesUsersController.prepareList}" value="#{bundle.CreateChallengesUsersShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateChallengesUsersIndexLink}"/>
-            </h:form>
+            <div class="container">
+                <h2>Donner un challenge à un utilisateur</h2>
+                <hr/>
+                <h:form>
+                    <h:panelGrid columns="2" style="margin-bottom : 1rem;">
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesUsersLabel_state}" for="state" />
+                        <h:inputText class="form-control" id="state" value="#{challengesUsersController.selected.state}" title="#{bundle.CreateChallengesUsersTitle_state}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_state}"/>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesUsersLabel_fkGiver}" for="fkGiver" />
+                        <h:selectOneMenu class="form-control" id="fkGiver" value="#{challengesUsersController.selected.fkGiver}" title="#{bundle.CreateChallengesUsersTitle_fkGiver}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesUsersLabel_fkGetter}" for="fkGetter" />
+                        <h:selectOneMenu class="form-control" id="fkGetter" value="#{challengesUsersController.selected.fkGetter}" title="#{bundle.CreateChallengesUsersTitle_fkGetter}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkGetter}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesUsersLabel_fkChall}" for="fkChall" />
+                        <h:selectOneMenu class="form-control" id="fkChall" value="#{challengesUsersController.selected.fkChall}" title="#{bundle.CreateChallengesUsersTitle_fkChall}" required="true" requiredMessage="#{bundle.CreateChallengesUsersRequiredMessage_fkChall}">
+                            <f:selectItems value="#{challengesController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel class="pr-4" value="#{bundle.CreateChallengesUsersLabel_datetimeDone}" for="datetimeDone" />
+                        <h:inputText class="form-control" id="datetimeDone" value="#{challengesUsersController.selected.datetimeDone}" title="#{bundle.CreateChallengesUsersTitle_datetimeDone}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:inputText>
+                    </h:panelGrid>
+                    <h:commandLink class="btn btn-success" action="#{challengesUsersController.create}" value="#{bundle.CreateChallengesUsersSaveLink}" />
+                    <h:commandLink class="btn btn-danger ml-1" action="#{challengesUsersController.prepareList}" value="#{bundle.CreateChallengesUsersShowAllLink}" immediate="true"/>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 

@@ -123,7 +123,7 @@ public class Difficulties implements Serializable {
 
     @Override
     public String toString() {
-        return "src.entities.Difficulties[ id=" + id + " ]";
+        return ""+title;
     }
     
 }
