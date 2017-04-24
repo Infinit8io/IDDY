@@ -204,6 +204,20 @@ public class UsersController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    public List<String> getFollowers(Users u) {
+        List<Friendship> fs = friendshipFacade.getFollowers(u);
+        ArrayList<String> users = new ArrayList<>();
+
+        for (Friendship f : fs) {
+            users.add(f.getFkUser1().getLoginName());
+        }
+        return users;
+    }
+
+    public Users getByLoginName(String loginname) {
+        return ejbFacade.findUserByLoginName(loginname);
+    }
+
     public void follow(int followedId) {
         FacesContext ctx = FacesContext.getCurrentInstance();
         Users follower = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
@@ -236,12 +250,12 @@ public class UsersController implements Serializable {
         } else {
             FacesContext ctx = FacesContext.getCurrentInstance();
             Users user = ejbFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
-            
+
             List<Users> us = ejbFacade.findByName('%' + search + '%');
-         
+
             List<Friendship> fs = friendshipFacade.getFolloweds(user);
             ArrayList<Integer> users = new ArrayList<>();
-            
+
             for (Friendship f : fs) {
                 users.add(f.getFkUser2().getId());
             }

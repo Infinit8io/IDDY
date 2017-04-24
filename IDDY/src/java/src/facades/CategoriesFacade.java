@@ -8,6 +8,7 @@ package src.facades;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import src.entities.Categories;
 
 /**
@@ -27,6 +28,11 @@ public class CategoriesFacade extends AbstractFacade<Categories> {
 
     public CategoriesFacade() {
         super(Categories.class);
+    }
+    
+    public Categories getByCatName(String name){
+        Query qc = em.createNamedQuery("Categories.findByTitle").setParameter("title", name);
+        return (Categories)qc.getSingleResult();
     }
     
 }

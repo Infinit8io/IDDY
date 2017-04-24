@@ -8,6 +8,7 @@ package src.facades;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import src.entities.Difficulties;
 
 /**
@@ -27,6 +28,11 @@ public class DifficultiesFacade extends AbstractFacade<Difficulties> {
 
     public DifficultiesFacade() {
         super(Difficulties.class);
+    }
+    
+    public Difficulties getByTitle(String title){
+        Query qd = em.createNamedQuery("Difficulties.findByTitle").setParameter("title", title);
+        return (Difficulties)qd.getSingleResult();
     }
     
 }
