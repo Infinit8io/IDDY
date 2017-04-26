@@ -31,11 +31,11 @@ public class ChallengesUsersFacade extends AbstractFacade<ChallengesUsers> {
     public ChallengesUsersFacade() {
         super(ChallengesUsers.class);
     }
+    
     public List<ChallengesUsers> getChallengesByState(int state, Users user){
         Query q = em.createNamedQuery("ChallengesUsers.findByStateAndUser");
         q.setParameter("state", state);
         q.setParameter("user", user);
-        
         
         return (List<ChallengesUsers>)q.getResultList();
     }

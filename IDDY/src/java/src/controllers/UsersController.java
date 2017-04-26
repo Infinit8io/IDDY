@@ -7,6 +7,7 @@ import src.facades.UsersFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,6 +23,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import src.entities.Challenges;
 import src.entities.Friendship;
 import src.entities.Users;
 import src.entities.ChallengesUsers;
@@ -39,6 +41,8 @@ public class UsersController implements Serializable {
     private src.facades.FriendshipFacade friendshipFacade;
     @EJB
     private src.facades.ChallengesUsersFacade challengesUsersFacade;
+    @EJB
+    private src.facades.ChallengesFacade challengesFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -245,6 +249,21 @@ public class UsersController implements Serializable {
 
         return cu;
     }
+    
+    public void giveARandomChallenge(){
+        Users u = getLoggedUser();
+        
+        //Take a random challenge from the system.
+        Challenges c = challengesFacade.getRandomBySystem();
+        ChallengesUsers cu = new ChallengesUsers();
+        Date date = new Date();
+        cu.setDatetimeCreate(date);
+        cu.setFkChall(c);
+        cu.setFkGetter(u);
+        cu.setState(0);
+        challengesUsersFacade.create(cu);
+        
+    }
 
     public void acceptChallenge(ChallengesUsers cu) {
         // Changer le state de cu par 1
@@ -255,6 +274,8 @@ public class UsersController implements Serializable {
     public void doneChallenge(ChallengesUsers cu) {
         // Changer le state de cu par 2 et date_done
         cu.setState(2);
+        Date date = new Date();
+        cu.setDatetimeDone(date);
         challengesUsersFacade.edit(cu);
     }
 
@@ -372,7 +393,6 @@ public class UsersController implements Serializable {
 
     public Users getLoggedUser() {
         String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        System.out.println(remoteUser);
         if (remoteUser != null) {
             current = ejbFacade.findUserByLoginName(remoteUser);
         }

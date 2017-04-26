@@ -22,7 +22,7 @@
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:inputText>
                         <h:outputLabel class="pr-4" value="#{bundle.EditChallengesUsersLabel_fkGiver}" for="fkGiver" />
-                        <h:selectOneMenu class="form-control" id="fkGiver" value="#{challengesUsersController.selected.fkGiver}" title="#{bundle.EditChallengesUsersTitle_fkGiver}" required="true" requiredMessage="#{bundle.EditChallengesUsersRequiredMessage_fkGiver}">
+                        <h:selectOneMenu class="form-control" id="fkGiver" value="#{challengesUsersController.selected.fkGiver}" title="#{bundle.EditChallengesUsersTitle_fkGiver}">
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                         </h:selectOneMenu>
                         <h:outputLabel class="pr-4" value="#{bundle.EditChallengesUsersLabel_fkGetter}" for="fkGetter" />
