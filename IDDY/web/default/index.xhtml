@@ -39,8 +39,10 @@
                                     <p class="mb-1">#{c.fkChall.description}</p>
                                     <small>#{c.fkChall.fkCat.title} | #{c.fkChall.fkDiff.title} | #{c.fkChall.fkDiff.points} points</small>
                                     <div class="d-flex w-100 justify-content-end">
-                                        <a href="#" class="btn btn-sm btn-success">Accept</a>
-                                        <a href="#" class="btn btn-sm btn-danger ml-1">Reject</a>
+                                        <h:form>
+                                            <h:commandLink class="btn btn-sm btn-success" value="Accept" action="#{usersController.acceptChallenge(c)}"/>
+                                            <h:commandLink class="btn btn-sm btn-danger ml-1" value="Reject" action="#{usersController.removeChallenge(c)}"/>
+                                        </h:form>
                                     </div>
                                 </span>
                             </c:forEach>
@@ -58,8 +60,10 @@
                                     <p class="mb-1">#{c.fkChall.description}</p>
                                     <small>#{c.fkChall.fkCat.title} | #{c.fkChall.fkDiff.title} | #{c.fkChall.fkDiff.points} points</small>
                                     <div class="d-flex w-100 justify-content-end">
-                                        <a href="#" class="btn btn-sm btn-success">Done</a>
-                                        <a href="#" class="btn btn-sm btn-danger ml-1">Cancel</a>
+                                        <h:form>
+                                            <h:commandLink class="btn btn-sm btn-success" value="Done" action="#{usersController.doneChallenge(c)}"/>
+                                            <h:commandLink class="btn btn-sm btn-danger ml-1" value="Cancel" action="#{usersController.removeChallenge(c)}"/>
+                                        </h:form>
                                     </div>
                                 </span>
                             </c:forEach>
@@ -77,7 +81,9 @@
                                     <p class="mb-1">#{c.fkChall.description}</p>
                                     <small>#{c.fkChall.fkCat.title} | #{c.fkChall.fkDiff.title} | #{c.fkChall.fkDiff.points} points</small>
                                     <div class="d-flex w-100 justify-content-end">
-                                        <a href="#" class="btn btn-sm btn-danger ml-1">I lied !</a>
+                                        <h:form>
+                                            <h:commandLink class="btn btn-sm btn-danger ml-1" value="I lied !" action="#{usersController.removeChallenge(c)}"/>
+                                        </h:form>
                                     </div>
                                 </span>
                             </c:forEach>

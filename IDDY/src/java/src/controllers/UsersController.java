@@ -221,29 +221,47 @@ public class UsersController implements Serializable {
         Users u = getLoggedUser();
         List<Friendship> fs = friendshipFacade.getFollowers(u);
         ArrayList<Users> users = new ArrayList<>();
-        
-        for (Friendship f : fs){
+
+        for (Friendship f : fs) {
             users.add(f.getFkUser1());
         }
         return users;
     }
-    
-    public List<Users> getUsersThatFollow(){
+
+    public List<Users> getUsersThatFollow() {
         Users u = getLoggedUser();
         List<Friendship> fs = friendshipFacade.getFolloweds(u);
         ArrayList<Users> users = new ArrayList<>();
-        
-        for (Friendship f : fs){
+
+        for (Friendship f : fs) {
             users.add(f.getFkUser2());
         }
         return users;
     }
-    
-    public List<ChallengesUsers> getChallengesConnectedUser(int state){
+
+    public List<ChallengesUsers> getChallengesConnectedUser(int state) {
         Users u = getLoggedUser();
         List<ChallengesUsers> cu = challengesUsersFacade.getChallengesByState(state, u);
-        
+
         return cu;
+    }
+
+    public void acceptChallenge(ChallengesUsers cu) {
+        // Changer le state de cu par 1
+        cu.setState(1);
+        challengesUsersFacade.edit(cu);
+    }
+
+    public void doneChallenge(ChallengesUsers cu) {
+        // Changer le state de cu par 2 et date_done
+        cu.setState(2);
+        challengesUsersFacade.edit(cu);
+    }
+
+    public void removeChallenge(ChallengesUsers cu) {
+        // delete le cu
+        //Users u = getLoggedUser();
+        challengesUsersFacade.remove(cu);
     }
 
     public Users getByLoginName(String loginname) {
