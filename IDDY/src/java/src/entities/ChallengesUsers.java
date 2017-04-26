@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ChallengesUsers.findById", query = "SELECT c FROM ChallengesUsers c WHERE c.id = :id"),
     @NamedQuery(name = "ChallengesUsers.findByState", query = "SELECT c FROM ChallengesUsers c WHERE c.state = :state"),
     @NamedQuery(name = "ChallengesUsers.findByDatetimeCreate", query = "SELECT c FROM ChallengesUsers c WHERE c.datetimeCreate = :datetimeCreate"),
-    @NamedQuery(name = "ChallengesUsers.findByDatetimeDone", query = "SELECT c FROM ChallengesUsers c WHERE c.datetimeDone = :datetimeDone")})
+    @NamedQuery(name = "ChallengesUsers.findByDatetimeDone", query = "SELECT c FROM ChallengesUsers c WHERE c.datetimeDone = :datetimeDone"),
+    @NamedQuery(name = "ChallengesUsers.findByStateAndUser", query = "SELECT c FROM ChallengesUsers c WHERE c.fkGetter = :user AND c.state = :state")})
 public class ChallengesUsers implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -24,6 +24,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import src.entities.Friendship;
 import src.entities.Users;
+import src.entities.ChallengesUsers;
 import src.facades.FriendshipFacade;
 
 @Named("usersController")
@@ -36,6 +37,8 @@ public class UsersController implements Serializable {
     private src.facades.UsersFacade ejbFacade;
     @EJB
     private src.facades.FriendshipFacade friendshipFacade;
+    @EJB
+    private src.facades.ChallengesUsersFacade challengesUsersFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -212,6 +215,35 @@ public class UsersController implements Serializable {
             users.add(f.getFkUser1().getLoginName());
         }
         return users;
+    }
+
+    public List<Users> getUsersFollowedBy() {
+        Users u = getLoggedUser();
+        List<Friendship> fs = friendshipFacade.getFollowers(u);
+        ArrayList<Users> users = new ArrayList<>();
+        
+        for (Friendship f : fs){
+            users.add(f.getFkUser1());
+        }
+        return users;
+    }
+    
+    public List<Users> getUsersThatFollow(){
+        Users u = getLoggedUser();
+        List<Friendship> fs = friendshipFacade.getFolloweds(u);
+        ArrayList<Users> users = new ArrayList<>();
+        
+        for (Friendship f : fs){
+            users.add(f.getFkUser2());
+        }
+        return users;
+    }
+    
+    public List<ChallengesUsers> getChallengesConnectedUser(int state){
+        Users u = getLoggedUser();
+        List<ChallengesUsers> cu = challengesUsersFacade.getChallengesByState(state, u);
+        
+        return cu;
     }
 
     public Users getByLoginName(String loginname) {

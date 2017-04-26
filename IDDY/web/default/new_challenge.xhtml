@@ -10,37 +10,39 @@
             <h:outputText value="Nouveau challenge"></h:outputText>
         </ui:define>
         <ui:define name="body">
+            <div class="container-fluid pr-0 pl-0">
+                <section class="jumbotron text-center">
+                    <div class="container">
+                        <h1 class="jumbotron-heading">New Challenge</h1>
+                        <p class="lead text-muted">Here is the place where you can challenge other users. </p>
+                    </div>
+                </section>
+            </div>
             <div class="container">
-                <div class="jumbotron">
-                    <h:form>
-                        <fieldset class="input-group">
-                            <legend>Challenge someone !</legend>
-                            <h:outputLabel for="user">User&nbsp;</h:outputLabel>
-                            <h:selectOneMenu id="user" value="#{challengesController.nc_UsrName}" class="form-control" >
-                                <f:selectItems value="#{usersController.getFollowers(usersController.getByLoginName(request.remoteUser))}" />
-                            </h:selectOneMenu>
-                            <br/>
-                            <h:outputLabel for="category">Category&nbsp;</h:outputLabel>
-                            <h:selectOneMenu id="category" value="#{challengesController.nc_CatName}" class="form-control" >
-                                <f:selectItems value="#{challengesController.allCategoriesStr}" />
-                            </h:selectOneMenu>
-                            <br/>
-                            <h:outputLabel for="difficulty">Difficulty&nbsp;</h:outputLabel>
-                            <h:selectOneMenu id="difficulty" value="#{challengesController.nc_DifName}" class="form-control" >
-                                <f:selectItems value="#{challengesController.allDifficultiesStr}" />
-                            </h:selectOneMenu>
-                            <br/>
-                            <h:outputLabel for="chal_title">Challenge title:&nbsp;</h:outputLabel>
-                            <h:inputText id="chal_title" value="#{challengesController.nc_Title}" class="form-control" />
-                            <br/>
-                            <h:outputLabel for="chal_desc">Challenge description:&nbsp;</h:outputLabel>
-                            <h:inputTextarea id="chal_desc" value="#{challengesController.nc_Desc}" class="form-control" />
-                            <br />
-                            <br />
-                        </fieldset>
-                        <h:commandButton value="Submit !" action="#{challengesController.nc_Submit}" class="btn btn-success" />
-                    </h:form>
-                </div>
+                <h:form>
+                    <h:outputLabel for="user">User&nbsp;</h:outputLabel>
+                    <h:selectOneMenu id="user" value="#{challengesController.nc_UsrName}" class="form-control" >
+                        <f:selectItems value="#{usersController.getFollowers(usersController.getByLoginName(request.remoteUser))}" />
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:outputLabel for="category">Category&nbsp;</h:outputLabel>
+                    <h:selectOneMenu id="category" value="#{challengesController.nc_CatName}" class="form-control" >
+                        <f:selectItems value="#{challengesController.allCategoriesStr}" />
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:outputLabel for="difficulty">Difficulty&nbsp;</h:outputLabel>
+                    <h:selectOneMenu id="difficulty" value="#{challengesController.nc_DifName}" class="form-control" >
+                        <f:selectItems value="#{challengesController.allDifficultiesStr}" />
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:outputLabel for="chal_title">Challenge title:&nbsp;</h:outputLabel>
+                    <h:inputText id="chal_title" value="#{challengesController.nc_Title}" class="form-control" />
+                    <br/>
+                    <h:outputLabel for="chal_desc">Challenge description:&nbsp;</h:outputLabel>
+                    <h:inputTextarea id="chal_desc" value="#{challengesController.nc_Desc}" class="form-control" />
+                    <br />
+                    <h:commandButton value="Submit !" action="#{challengesController.nc_Submit}" class="btn btn-success" />
+                </h:form>
             </div>
         </ui:define>
     </ui:composition>
