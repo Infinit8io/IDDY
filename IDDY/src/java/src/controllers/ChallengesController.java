@@ -52,7 +52,7 @@ public class ChallengesController implements Serializable {
     private String nc_Desc;
     
     
-    public void nc_Submit(){
+    public String nc_Submit(){
         FacesContext ctx = FacesContext.getCurrentInstance();
         Users giver = usrFacade.findUserByLoginName(ctx.getExternalContext().getRemoteUser());
         Users getter = usrFacade.findUserByLoginName(nc_UsrName);
@@ -73,6 +73,13 @@ public class ChallengesController implements Serializable {
         cul.setDatetimeCreate(new Date());
         culFacade.create(cul);
         
+        this.nc_CatName = "";
+        this.nc_Desc = "";
+        this.nc_DifName = "";
+        this.nc_Title = "";
+        this.nc_UsrName = "";
+        
+        return "index.xhtml";
     }
 
     public String getNc_UsrName() {
