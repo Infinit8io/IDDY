@@ -17,8 +17,13 @@
                         <h1 class="jumbotron-heading">Dashboard</h1>
                         <p class="lead text-muted">Here is the place where you can find informations about your challenges. </p>
                         <div class="text-center">
-                            <a href="./users.xhtml" class="btn btn-primary">List of users</a>
+                            <a href="./users.xhtml" class="btn btn-info">List of users</a>
                             <a href="./new_challenge.xhtml" class="btn btn-success">Challenge someone</a>
+                        </div>
+                        <div class="text-center">
+                            <h:form>
+                                <h:commandLink value="Get a random challenge !" class="btn btn-primary mt-1" action="#{usersController.giveARandomChallenge()}"/>
+                            </h:form>
                         </div>
                     </div>
                 </section>
@@ -91,6 +96,12 @@
                         <br/>
                     </div>
                     <div class="col-5">
+                        <h3>Informations</h3>
+                        <hr/>
+                        <h4>#{usersController.getLoggedUser().loginName}</h4>
+                        <blockquote class="blockquote">#{usersController.getLoggedUser().bio}</blockquote>
+                        <p><strong>#{usersController.getScoreUser(usersController.getLoggedUser())}</strong> points</p>
+                        <br/>
                         <h3>Followers</h3>
                         <hr/>
 
