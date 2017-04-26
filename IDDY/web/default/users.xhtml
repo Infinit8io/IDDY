@@ -39,6 +39,7 @@
                         <tr>
                             <th>Pseudo</th>
                             <th>Biographie</th>
+                            <th>Points</th>
                             <th>Follow</th>
                         </tr>
 
@@ -48,6 +49,7 @@
                                 <tr>
                                     <td><span class="lead">#{u.loginName}</span></td>
                                     <td>#{u.bio}</td>
+                                    <td>#{usersController.getScoreUser(u)}</td>
                                     <td>
                                         <h:form>
                                             <c:choose>

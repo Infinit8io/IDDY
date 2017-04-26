@@ -263,6 +263,16 @@ public class UsersController implements Serializable {
         //Users u = getLoggedUser();
         challengesUsersFacade.remove(cu);
     }
+    
+    public int getScoreUser(Users u){
+        // get all challengeDoneByTheUser
+        List<ChallengesUsers> cu = challengesUsersFacade.getChallengesByState(2, u);
+        int score = 0;
+        for (ChallengesUsers challenge : cu){
+            score += challenge.getFkChall().getFkDiff().getPoints();
+        }
+        return score;
+    }
 
     public Users getByLoginName(String loginname) {
         return ejbFacade.findUserByLoginName(loginname);

@@ -96,7 +96,7 @@
 
                         <ul class="list-group">
                             <c:forEach var="u" items="#{usersController.getUsersFollowedBy()}">
-                                <li class="list-group-item">#{u.loginName}</li>
+                                <li class="list-group-item">#{u.loginName} | #{usersController.getScoreUser(u)} points</li>
                             </c:forEach>
                         </ul>
                         <br/>
@@ -105,7 +105,7 @@
                         <hr/>
                         <ul class="list-group">
                             <c:forEach var="u" items="#{usersController.getUsersThatFollow()}">
-                                <li class="list-group-item">#{u.loginName}</li>
+                                <li class="list-group-item">#{u.loginName} | #{usersController.getScoreUser(u)} points</li>
                             </c:forEach>
                         </ul>
                     </div>
