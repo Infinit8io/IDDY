@@ -1,17 +1,18 @@
 # Projet JEE - IDDY
 
-Pour faire fonctionner l'application, il faut commencer par importer la base de donnÈes iddy.sql.
+Pour faire fonctionner l'application, il faut commencer par importer la base de donn√©es iddy.sql.
 
-La configuration du REALM a ÈtÈ faite selon les directives suivantes :
+La configuration du REALM a √©t√© faite selon les directives suivantes :
 http://www.pm-consultant.fr/en/blog_des_ti/jee/configurer_un_realm_mysql_dans_glassfish
 
-Les comptes dÈj‡ existants sont les suivants :
+Les comptes d√©j√† existants sont les suivants :
 
 * user1 - Utilistaeur normal
 * user2 - Utilisateur normal
 * user3 - Administrateur
 * user4 - Administrateur
 
+Le mot de passe est 1234
 ---------
 
 ## Documents de test
@@ -24,7 +25,7 @@ https://docs.google.com/document/d/15up-0cOy05Urd00y7FzuVhT647bnY1kVgn_yndlYBTI/
 
 
 
-*SpÈcification de tests:*
+*Sp√©cification de tests:*
 
 https://docs.google.com/spreadsheets/d/1sOyamvNnbrJ0QVM2P0a5D-XihgB8t5mgbvZb9cvbpmI/edit?usp=sharing
 
