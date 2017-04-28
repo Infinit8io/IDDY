@@ -13,6 +13,7 @@ Les comptes déjà existants sont les suivants :
 * user4 - Administrateur
 
 Le mot de passe est 1234
+
 ---------
 
 ## Documents de test
