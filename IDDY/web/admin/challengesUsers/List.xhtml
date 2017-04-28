@@ -17,8 +17,8 @@
                     <h:outputText escape="false" value="#{bundle.ListChallengesUsersEmpty}" rendered="#{challengesUsersController.items.rowCount == 0}"/>
                     <h:panelGroup rendered="#{challengesUsersController.items.rowCount > 0}">
                         <h:outputText value="#{challengesUsersController.pagination.pageFirstItem + 1}..#{challengesUsersController.pagination.pageLastItem + 1}/#{challengesUsersController.pagination.itemsCount}"/>&nbsp;
-                        <h:commandLink action="#{challengesUsersController.previous}" value="#{bundle.Previous} #{challengesUsersController.pagination.pageSize}" rendered="#{challengesUsersController.pagination.hasPreviousPage}"/>&nbsp;
-                        <h:commandLink action="#{challengesUsersController.next}" value="#{bundle.Next} #{challengesUsersController.pagination.pageSize}" rendered="#{challengesUsersController.pagination.hasNextPage}"/>&nbsp;
+                        <h:commandLink class="btn btn-primary" action="#{challengesUsersController.previous}" value="#{bundle.Previous} #{challengesUsersController.pagination.pageSize}" rendered="#{challengesUsersController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink class="btn btn-primary" action="#{challengesUsersController.next}" value="#{bundle.Next} #{challengesUsersController.pagination.pageSize}" rendered="#{challengesUsersController.pagination.hasNextPage}"/>&nbsp;
                         <h:dataTable value="#{challengesUsersController.items}" var="item" class="table" headerClass="th-perso">
                             <h:column>
                                 <f:facet name="header">
@@ -52,19 +52,19 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListChallengesUsersTitle_fkGiver}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.fkGiver}"/>
+                                <h:outputText value="#{item.fkGiver.toString()}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListChallengesUsersTitle_fkGetter}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.fkGetter}"/>
+                                <h:outputText value="#{item.fkGetter.toString()}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListChallengesUsersTitle_fkChall}"/>
                                 </f:facet>
-                                <h:outputText value="#{item.fkChall}"/>
+                                <h:outputText value="#{item.fkChall.toString()}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">

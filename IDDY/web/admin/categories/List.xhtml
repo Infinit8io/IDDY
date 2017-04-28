@@ -17,8 +17,8 @@
                     <h:outputText escape="false" value="#{bundle.ListCategoriesEmpty}" rendered="#{categoriesController.items.rowCount == 0}"/>
                     <h:panelGroup rendered="#{categoriesController.items.rowCount > 0}">
                         <h:outputText value="#{categoriesController.pagination.pageFirstItem + 1}..#{categoriesController.pagination.pageLastItem + 1}/#{categoriesController.pagination.itemsCount}"/>&nbsp;
-                        <h:commandLink action="#{categoriesController.previous}" value="#{bundle.Previous} #{categoriesController.pagination.pageSize}" rendered="#{categoriesController.pagination.hasPreviousPage}"/>&nbsp;
-                        <h:commandLink action="#{categoriesController.next}" value="#{bundle.Next} #{categoriesController.pagination.pageSize}" rendered="#{categoriesController.pagination.hasNextPage}"/>&nbsp;
+                        <h:commandLink class="btn btn-primary" action="#{categoriesController.previous}" value="#{bundle.Previous} #{categoriesController.pagination.pageSize}" rendered="#{categoriesController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink class="btn btn-primary" action="#{categoriesController.next}" value="#{bundle.Next} #{categoriesController.pagination.pageSize}" rendered="#{categoriesController.pagination.hasNextPage}"/>&nbsp;
                         
                         <h:dataTable value="#{categoriesController.items}" var="item" class="table" headerClass="th-perso" >
                             <h:column>
