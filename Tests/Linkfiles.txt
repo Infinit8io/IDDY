@@ -1,0 +1,15 @@
+Plan de test :
+
+https://docs.google.com/document/d/15up-0cOy05Urd00y7FzuVhT647bnY1kVgn_yndlYBTI/edit?usp=sharing
+
+
+
+Spécification de tests:
+
+https://docs.google.com/spreadsheets/d/1sOyamvNnbrJ0QVM2P0a5D-XihgB8t5mgbvZb9cvbpmI/edit?usp=sharing
+
+
+
+Rapport de test :
+
+https://docs.google.com/document/d/1CJigM0noKF508xZjKR5Nud_Y3WSDZig89FRUVmv_wLQ/edit?usp=sharing
