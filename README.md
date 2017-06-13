@@ -35,3 +35,5 @@ https://docs.google.com/spreadsheets/d/1sOyamvNnbrJ0QVM2P0a5D-XihgB8t5mgbvZb9cvb
 *Rapport de test :*
 https://docs.google.com/document/d/1CJigM0noKF508xZjKR5Nud_Y3WSDZig89FRUVmv_wLQ/edit?usp=sharing
 
+Have fun !
+
